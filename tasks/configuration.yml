@@ -39,8 +39,8 @@
       option:   rabbit_password
       value:    "{{ rabbit_pass }}"
   notify:
-    - Restart neutron plugin openvswitch agent
     - Restart openvswitch
+    - Restart neutron plugin openvswitch agent
 
 - name: Configure openvswitch agent plugin
   ini_file: dest=/etc/neutron/plugins/ml2/ml2_conf.ini
@@ -59,8 +59,8 @@
       value:    True
 
   notify:
-    - Restart neutron plugin openvswitch agent
     - Restart openvswitch
+    - Restart neutron plugin openvswitch agent
 
 - name: Configure openvswitch agent tunnelling
   ini_file: dest=/etc/neutron/plugins/ml2/ml2_conf.ini
@@ -78,8 +78,8 @@
       option:   enable_tunneling
       value:    True
   notify:
-    - Restart neutron server
     - Restart openvswitch
+    - Restart neutron server
   when: local_ip != "127.0.0.1"
 
 - name: Remove tunneling configuration for openvswitch agent
@@ -95,6 +95,6 @@
     - section:  ovs
       option:   enable_tunneling
   notify:
-    - Restart neutron server
     - Restart openvswitch
+    - Restart neutron server
   when: local_ip == "127.0.0.1"
