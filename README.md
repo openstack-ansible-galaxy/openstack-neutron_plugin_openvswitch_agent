@@ -47,6 +47,13 @@ Example Playbook
         - role: openstack-neutron_plugin_ml2
           local_ip: "{{ ansible_eth1.ipv4.address }}"
 
+---
+
+A complete Ansible playbook demo, which uses this role, is available here: <https://github.com/dguerri/vagrant-ansible-openstack>
+
+---
+
+
 License
 -------
 
