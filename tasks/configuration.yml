@@ -48,16 +48,12 @@
             option="{{ item.option }}"
             value="{{ item.value }}"
   with_items:
-    - section:  ml2
-      option:   mechanism_drivers
-      value:    openvswitch
     - section:  securitygroup
       option:   firewall_driver
       value:    neutron.agent.linux.iptables_firewall.OVSHybridIptablesFirewallDriver
     - section:  securitygroup
       option:   enable_security_group
       value:    True
-
   notify:
     - Restart openvswitch
     - Restart neutron plugin openvswitch agent
