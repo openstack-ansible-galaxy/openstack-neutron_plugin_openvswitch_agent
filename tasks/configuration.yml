@@ -39,7 +39,6 @@
       option:   rabbit_password
       value:    "{{ rabbit_pass }}"
   notify:
-    - Restart openvswitch
     - Restart neutron plugin openvswitch agent
 
 - name: Configure openvswitch agent plugin
@@ -55,7 +54,6 @@
       option:   enable_security_group
       value:    True
   notify:
-    - Restart openvswitch
     - Restart neutron plugin openvswitch agent
 
 - name: Configure openvswitch agent tunnelling
@@ -74,8 +72,7 @@
       option:   enable_tunneling
       value:    True
   notify:
-    - Restart openvswitch
-    - Restart neutron server
+    - Restart neutron plugin openvswitch agent
   when: local_ip != "127.0.0.1"
 
 - name: Remove tunneling configuration for openvswitch agent
@@ -91,6 +88,5 @@
     - section:  ovs
       option:   enable_tunneling
   notify:
-    - Restart openvswitch
-    - Restart neutron server
+    - Restart neutron plugin openvswitch agent
   when: local_ip == "127.0.0.1"
