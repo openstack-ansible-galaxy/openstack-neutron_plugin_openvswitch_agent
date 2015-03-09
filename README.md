@@ -39,12 +39,12 @@ Example Playbook
 
     - hosts: compute001
       roles:
-        - role: openstack-neutron_plugin_ml2
+        - role: openstack-neutron_openvswitch_agent
           local_ip: "{{ ansible_eth1.ipv4.address }}"
 
     - hosts: network001
       roles:
-        - role: openstack-neutron_plugin_ml2
+        - role: openstack-neutron_openvswitch_agent
           local_ip: "{{ ansible_eth1.ipv4.address }}"
 
 ---
