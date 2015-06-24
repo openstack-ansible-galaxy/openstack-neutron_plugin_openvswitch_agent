@@ -66,11 +66,11 @@
       option:   local_ip
       value:    "{{ local_ip }}"
     - section:  ovs
-      option:   tunnel_type
-      value:    gre
-    - section:  ovs
       option:   enable_tunneling
       value:    True
+    - section:  agent
+      option:   tunnel_types
+      value:    gre
   notify:
     - Restart neutron plugin openvswitch agent
   when: local_ip != "127.0.0.1"
@@ -84,9 +84,9 @@
     - section:  ovs
       option:   local_ip
     - section:  ovs
-      option:   tunnel_type
-    - section:  ovs
       option:   enable_tunneling
+    - section:  agent
+      option:   tunnel_types
   notify:
     - Restart neutron plugin openvswitch agent
   when: local_ip == "127.0.0.1"
