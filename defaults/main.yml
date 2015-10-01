@@ -19,6 +19,7 @@
 
 # Neutron
 neutron_plugin_openvswitch_agent_local_ip: 127.0.0.1
+neutron_plugin_openvswitch_agent_gre_enabled: true
 
 # RabbitMQ
 neutron_plugin_openvswitch_agent_rabbit_userid: rabbit_pass_default

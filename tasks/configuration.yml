@@ -89,7 +89,7 @@
       value:    True
   notify:
     - Restart neutron plugin openvswitch agent
-  when: neutron_plugin_openvswitch_agent_local_ip != "127.0.0.1"
+  when: neutron_plugin_openvswitch_agent_local_ip != "127.0.0.1" and neutron_plugin_openvswitch_agent_gre_enabled
 
 - name: Remove tunneling configuration for openvswitch agent
   ini_file: dest=/etc/neutron/plugins/ml2/ml2_conf.ini
@@ -105,4 +105,4 @@
       option:   enable_tunneling
   notify:
     - Restart neutron plugin openvswitch agent
-  when: neutron_plugin_openvswitch_agent_local_ip == "127.0.0.1"
+  when: neutron_plugin_openvswitch_agent_local_ip == "127.0.0.1" and neutron_plugin_openvswitch_agent_gre_enabled
