@@ -18,9 +18,15 @@
 #
 
 # Neutron
-local_ip: 127.0.0.1
+neutron_plugin_openvswitch_agent_local_ip: 127.0.0.1
+neutron_plugin_openvswitch_agent_gre_enabled: true
 
 # RabbitMQ
-rabbit_hostname: localhost
-rabbit_username: rabbit_username_default
-rabbit_pass: rabbit_pass_default
+neutron_plugin_openvswitch_agent_rabbit_userid: rabbit_pass_default
+neutron_plugin_openvswitch_agent_rabbit_password: rabbit_username_default
+neutron_plugin_openvswitch_agent_rabbit_virtual_host: /
+neutron_plugin_openvswitch_agent_rabbit_retry_interval: 1
+neutron_plugin_openvswitch_agent_rabbit_host: localhost
+neutron_plugin_openvswitch_agent_rabbit_port: 5672
+neutron_plugin_openvswitch_agent_rabbit_hosts: "{{ neutron_plugin_openvswitch_agent_rabbit_host }}:{{ neutron_plugin_openvswitch_agent_rabbit_port }}"
+neutron_plugin_openvswitch_agent_rabbit_ha_queues: False
