@@ -26,18 +26,34 @@
     - section:  DEFAULT
       option:   auth_strategy
       value:    keystone
+    # RabbitMQ
     - section:  DEFAULT
       option:   rpc_backend
       value:    neutron.openstack.common.rpc.impl_kombu
     - section:  DEFAULT
-      option:   rabbit_host
-      value:    "{{ rabbit_hostname }}"
-    - section:  DEFAULT
       option:   rabbit_userid
-      value:    "{{ rabbit_username }}"
+      value:    "{{ neutron_plugin_openvswitch_agent_rabbit_userid }}"
     - section:  DEFAULT
       option:   rabbit_password
-      value:    "{{ rabbit_pass }}"
+      value:    "{{ neutron_plugin_openvswitch_agent_rabbit_password }}"
+    - section:  DEFAULT
+      option:   rabbit_virtual_host
+      value:    "{{ neutron_plugin_openvswitch_agent_rabbit_virtual_host }}"
+    - section:  DEFAULT
+      option:   rabbit_retry_interval
+      value:    "{{ neutron_plugin_openvswitch_agent_rabbit_retry_interval }}"
+    - section:  DEFAULT
+      option:   rabbit_host
+      value:    "{{ neutron_plugin_openvswitch_agent_rabbit_host }}"
+    - section:  DEFAULT
+      option:   rabbit_port
+      value:    "{{ neutron_plugin_openvswitch_agent_rabbit_port }}"
+    - section:  DEFAULT
+      option:   rabbit_hosts
+      value:    "{{ neutron_plugin_openvswitch_agent_rabbit_hosts }}"
+    - section:  DEFAULT
+      option:   rabbit_ha_queues
+      value:    "{{ neutron_plugin_openvswitch_agent_rabbit_ha_queues }}"
   notify:
     - Restart neutron plugin openvswitch agent
 
@@ -64,7 +80,7 @@
   with_items:
     - section:  ovs
       option:   local_ip
-      value:    "{{ local_ip }}"
+      value:    "{{ neutron_plugin_openvswitch_agent_local_ip }}"
     - section:  ovs
       option:   tunnel_type
       value:    gre
@@ -73,7 +89,7 @@
       value:    True
   notify:
     - Restart neutron plugin openvswitch agent
-  when: local_ip != "127.0.0.1"
+  when: neutron_plugin_openvswitch_agent_local_ip != "127.0.0.1"
 
 - name: Remove tunneling configuration for openvswitch agent
   ini_file: dest=/etc/neutron/plugins/ml2/ml2_conf.ini
@@ -89,4 +105,4 @@
       option:   enable_tunneling
   notify:
     - Restart neutron plugin openvswitch agent
-  when: local_ip == "127.0.0.1"
+  when: neutron_plugin_openvswitch_agent_local_ip == "127.0.0.1"
